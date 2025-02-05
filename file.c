@@ -5,7 +5,7 @@
 Result_String_Int File_getContent(const char *file)
 {
     FILE *fileHandle = fopen(file, "rb");
-    if (fileHandle == nullptr)
+    if (fileHandle == NULL)
     {
         return Result_String_Int_createError(FILE_ERROR_ERRNO);
     }
@@ -33,7 +33,7 @@ Result_String_Int File_getContent(const char *file)
     }
 
     char *buffer = calloc(byteAmount, sizeof(*buffer));
-    if (buffer == nullptr)
+    if (buffer == NULL)
     {
         return Result_String_Int_createError(FILE_ERROR_ALLOCATION);
     }
