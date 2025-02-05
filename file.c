@@ -6,9 +6,7 @@ Result_String_Int File_getContent(const char *file)
 {
     FILE *fileHandle = fopen(file, "rb");
     if (fileHandle == NULL)
-    {
         return Result_String_Int_createError(FILE_ERROR_ERRNO);
-    }
 
     if (fseek(fileHandle, 0, SEEK_END) != 0)
     {
@@ -20,9 +18,7 @@ Result_String_Int File_getContent(const char *file)
 
     const long byteAmount = ftell(fileHandle);
     if (byteAmount == -1)
-    {
         return Result_String_Int_createError(FILE_ERROR_ERRNO);
-    }
 
     if (fseek(fileHandle, 0, SEEK_SET) != 0)
     {
@@ -34,9 +30,7 @@ Result_String_Int File_getContent(const char *file)
 
     char *buffer = calloc(byteAmount, sizeof(*buffer));
     if (buffer == NULL)
-    {
         return Result_String_Int_createError(FILE_ERROR_ALLOCATION);
-    }
 
     size_t readByteAmount = fread(buffer, sizeof(char), byteAmount, fileHandle);
     if (readByteAmount != byteAmount)
@@ -48,9 +42,7 @@ Result_String_Int File_getContent(const char *file)
     }
 
     if (fclose(fileHandle) == EOF)
-    {
         return Result_String_Int_createError(FILE_ERROR_CLOSE);
-    }
 
     const String content = String_create(buffer);
     free(buffer);
