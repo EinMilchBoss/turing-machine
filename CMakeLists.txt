@@ -3,4 +3,4 @@ project(turing_machine C)
 
 set(CMAKE_C_STANDARD 23)
 
-add_executable(turing_machine main.c)
+add_executable(turing_machine main.c string.c string.h file.h file.c result.h result.c)
