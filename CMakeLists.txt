@@ -3,7 +3,8 @@ project(turing_machine C)
 
 set(CMAKE_C_STANDARD 17)
 
-add_executable(turing_machine
+add_executable(
+        turing_machine
         main.c
         string.h
         string.c
@@ -12,4 +13,9 @@ add_executable(turing_machine
         result.h
         result.c
         list.h
-        list.c )
+        list.c
+        flow.c
+        flow.h
+)
+
+target_compile_options(turing_machine PRIVATE -Wall -Wextra -Werror)

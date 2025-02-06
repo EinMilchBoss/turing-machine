@@ -17,6 +17,7 @@ String String_create(const char *cString);
 String String_copy(String string);
 void String_delete(String *string);
 int String_isEmpty(String string);
+int String_isComment(String string);
 struct _List_String String_split(String string, char separator);
 
 #endif //STRING_H

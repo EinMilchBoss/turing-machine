@@ -68,6 +68,20 @@ int String_isEmpty(const String string)
     return string.cString == NULL && string.length == 0 && string.capacity == 0;
 }
 
+int String_isComment(const String string)
+{
+    if (String_isEmpty(string))
+        return 0;
+
+    for (const char *first = string.cString; *first != '\0'; first++)
+    {
+        if (*first != ' ' || *first != '\t')
+            return strncmp(first, "//", 2) == 0;
+    }
+
+    return 0;
+}
+
 List_String String_split(const String string, const char separator)
 {
     if (String_isEmpty(string))

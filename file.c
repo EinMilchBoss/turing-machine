@@ -32,8 +32,8 @@ Result_String_Int File_getContent(const char *file)
     if (buffer == NULL)
         return Result_String_Int_createError(FILE_ERROR_ALLOCATION);
 
-    size_t readByteAmount = fread(buffer, sizeof(char), byteAmount, fileHandle);
-    if (readByteAmount != byteAmount)
+    const size_t readByteAmount = fread(buffer, sizeof(char), byteAmount, fileHandle);
+    if (readByteAmount != (size_t)byteAmount)
     {
         if (feof(fileHandle))
             return Result_String_Int_createError(FILE_ERROR_UNEXPECTED_EOF);
