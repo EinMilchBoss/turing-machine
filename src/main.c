@@ -5,7 +5,7 @@
 
 #include "dtm.h"
 
-int parse_state(uint8_t *state, const char *line, const char *tag, const size_t tag_length) {
+int parse_state(state_t *state, const char *line, const char *tag, const size_t tag_length) {
     // + 1 for the ':' at the end.
     const char *start_value = line + tag_length + 1;
     *state = string_to_uint8(start_value);
@@ -19,7 +19,7 @@ int parse_state(uint8_t *state, const char *line, const char *tag, const size_t 
     return EXIT_SUCCESS;
 }
 
-int parse_states_amount(uint8_t *state, const char *line, const char *tag, const size_t tag_length) {
+int parse_states_amount(state_t *state, const char *line, const char *tag, const size_t tag_length) {
     if (parse_state(state, line, tag, tag_length))
         return EXIT_FAILURE;
 
