@@ -18,7 +18,7 @@ List_String List_String_tryCreate(const struct _String *originals, const size_t 
 void List_String_delete(List_String *list);
 void List_String_push(List_String *list, struct _String string);
 int List_String_tryPush(List_String *list, struct _String string);
-int List_String_remove(List_String *list, size_t index);
+void List_String_remove(List_String *list, size_t index);
 int List_String_tryRemove(List_String *list, size_t index);
 void List_String_condense(List_String *list);
 

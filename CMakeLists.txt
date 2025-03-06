@@ -16,6 +16,15 @@ add_executable(
         list.c
         flow.c
         flow.h
+        transition.c
+        transition.h
+        tm.c
+        tm.h
 )
 
 target_compile_options(turing_machine PRIVATE -Wall -Wextra -Werror)
+
+include(CTest)
+
+add_executable(dtm test/tm.c)
+add_test(NAME dtm COMMAND dtm)

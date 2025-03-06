@@ -38,7 +38,7 @@ List_String List_String_create(const String *originals, const size_t size)
 
     String *copies = calloc(capacity, sizeof(*copies));
     if (copies == NULL)
-        PANIC_MESSAGE("Could not create list of strings of capacity %ull.", capacity);
+        PANIC_FORMAT("Could not create list of strings of capacity %ull.", capacity);
 
     memmove(copies, originals, size * sizeof(*copies));
 
@@ -57,6 +57,9 @@ List_String List_String_tryCreate(const String *originals, const size_t size)
     return List_String_create(originals, size);
 }
 
+/**
+ * Deletes the list but not the `String`s itself.
+ */
 void List_String_delete(List_String *list)
 {
     if (list->values != NULL)
@@ -97,7 +100,7 @@ int List_String_tryPush(List_String *list, const String string)
     return EXIT_SUCCESS;
 }
 
-int List_String_remove(List_String *list, const size_t index)
+void List_String_remove(List_String *list, const size_t index)
 {
     assert(list != NULL);
     assert(index >= list->size);
@@ -123,8 +126,6 @@ int List_String_remove(List_String *list, const size_t index)
         list->values[i] = list->values[i + 1];
 
     list->size--;
-
-    return EXIT_SUCCESS;
 }
 
 int List_String_tryRemove(List_String *list, const size_t index)
@@ -132,19 +133,25 @@ int List_String_tryRemove(List_String *list, const size_t index)
     if (list != NULL && index >= list->size)
         return EXIT_FAILURE;
 
-    return List_String_remove(list, index);
+    List_String_remove(list, index);
+    return EXIT_SUCCESS;
 }
 
 void List_String_condense(List_String *list)
 {
-    int result = 0;
+    /*
+     * - Trim all strings.
+     *
+     */
+    // int result = 0;
 
     for (size_t i = 0; i < list->size; i++)
     {
+
+
         if (String_isComment(list->values[i]))
         {
-            result = List_String_remove(list, i);
-            assert(result);
+            List_String_remove(list, i);
         }
 
         // list->values[i]
