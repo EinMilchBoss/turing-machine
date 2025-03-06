@@ -99,5 +99,5 @@ int main(void) {
         line = strtok_r(NULL, "\n", &strtok_save);
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }

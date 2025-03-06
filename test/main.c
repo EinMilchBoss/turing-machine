@@ -80,5 +80,5 @@ int main(void) {
     test_string_to_uint8();
     test_parse_transition();
 
-    return 0;
+    return EXIT_SUCCESS;
 }
