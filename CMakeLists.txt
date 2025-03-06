@@ -1,30 +1,21 @@
 cmake_minimum_required(VERSION 3.30)
-project(turing_machine C)
+project(tm C)
 
 set(CMAKE_C_STANDARD 17)
 
 add_executable(
-        turing_machine
-        main.c
-        string.h
-        string.c
-        file.h
-        file.c
-        result.h
-        result.c
-        list.h
-        list.c
-        flow.c
-        flow.h
-        transition.c
-        transition.h
-        tm.c
-        tm.h
+        tm
+        src/main.c
+        src/dtm.c
 )
-
-target_compile_options(turing_machine PRIVATE -Wall -Wextra -Werror)
+target_compile_options(tm PRIVATE -Wall -Wextra -Werror -Wconversion)
 
 include(CTest)
 
-add_executable(dtm test/tm.c)
-add_test(NAME dtm COMMAND dtm)
+add_executable(
+        tm_test
+        test/main.c
+        src/dtm.c
+)
+target_compile_options(tm_test PRIVATE -Wall -Wextra -Werror -Wconversion)
+add_test(NAME tm_test COMMAND tm_test)
