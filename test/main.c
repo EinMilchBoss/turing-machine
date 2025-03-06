@@ -10,6 +10,7 @@ void test_string_to_uint8() {
     assert(string_to_uint8(NULL) == UINT8_MAX);
     assert(string_to_uint8("") == UINT8_MAX);
     assert(string_to_uint8("a") == UINT8_MAX);
+    assert(string_to_uint8("-1") == UINT8_MAX);
 
     // Bounds.
     assert(string_to_uint8("0") == 0);

@@ -69,9 +69,10 @@ int main(void) {
 
     struct dtm dtm = {0};
 
-    char *save = NULL;
-    const char *line = strtok_r(content, "\n", &save);
+    char *strtok_save = NULL;
+    const char *line = strtok_r(content, "\n", &strtok_save);
     for (size_t line_number = 1; line; line_number++) {
+        // Ignore empty lines.
         if (strlen(line) == 0)
             continue;
 
@@ -95,7 +96,7 @@ int main(void) {
             //     return EXIT_FAILURE;
         }
 
-        line = strtok_r(NULL, "\n", &save);
+        line = strtok_r(NULL, "\n", &strtok_save);
     }
 
     return 0;
