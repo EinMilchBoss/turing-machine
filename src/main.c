@@ -52,7 +52,6 @@ char* parse_alphabet(const char *line) {
 
 int main(void) {
     struct dtm dtm = {0};
-    size_t transition_index = 0;
 
     FILE *file = fopen("config.tm", "rb");
     if (!file)
@@ -75,7 +74,7 @@ int main(void) {
         }
 
         // TODO: Have a uint8_t for flags and flip them to 1 when already parsed.
-        // TODO: Then include the check of those bits before the `strncmp()` call to avoid unnecessary calls.
+        // TODO: Then include the check of those bits before the strncmp() call to avoid unnecessary calls.
         if (strncmp(line, states_tag, states_tag_length) == 0) {
             if (parse_states_amount(&dtm.states_amount, line, states_tag, states_tag_length))
                 return EXIT_FAILURE;
@@ -89,18 +88,19 @@ int main(void) {
             if (parse_state(&dtm.reject_state, line, reject_tag, reject_tag_length))
                 return EXIT_FAILURE;
         } else if (strncmp(line, alphabet_tag, alphabet_tag_length) == 0) {
+            // TODO: Actually parse the alphabet.
             // + 1 for the ':' at the end.
             dtm.alphabet = (char*)line + alphabet_tag_length + 1;
             printf("Parsed 'alphabet' successfully.\n");
         } else {
-            if (transition_index >= TRANSITIONS_MAX)
+            if (dtm.transition_size >= TRANSITIONS_MAX)
                 return EXIT_FAILURE;
 
-            if (parse_transition(&dtm.transitions[transition_index], line))
+            if (parse_transition(&dtm.transitions[dtm.transition_size], line))
                 return EXIT_FAILURE;
 
-            printf("Parsed transition %zu.\n", transition_index + 1);
-            transition_index++;
+            printf("Parsed transition %zu.\n", dtm.transition_size + 1);
+            dtm.transition_size++;
         }
 
         line_number++;

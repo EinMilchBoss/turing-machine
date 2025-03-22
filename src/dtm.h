@@ -27,6 +27,7 @@ struct dtm {
     char *alphabet;
 
     struct transition transitions[TRANSITIONS_MAX];
+    size_t transition_size;
 };
 
 uint8_t string_to_uint8(const char *string);
